@@ -13,6 +13,6 @@ span {
   border-width: 5px;
   background-color: yellow;
 }
-a.{}
-b.{display: block;}
-c.{display; inline-block;}
+span.a{}
+span.b{display: block;}
+span.c{display; inline-block;}
