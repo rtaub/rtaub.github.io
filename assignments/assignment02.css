@@ -20,3 +20,10 @@ img[alt="cat icon"]{position: fixed; bottom: 0; right: 0;}
 img[alt="dog icon"]{position: relative; left: -50px; top: -150px;}
 #positionMe{background-color: orange;}
 img[alt="bird icon"]{position: relative; left: 250px; top: 200px;}
+nav {
+ position: sticky;
+ padding: 5px;
+ background-color:rgba(0,255,0,0.9);
+ font-size: 20px;
+ top: 0;
+}
