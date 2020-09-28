@@ -1,8 +1,12 @@
+/*Step 2. the page is turned skyblue by using background-color to style the body element. */
 body {
   background-color: skyblue;
 }
+/*Step 3. the font is changed for "igottabeme" by using the # id selector*/
 #igottabeme{ font-family: Arial, Helvetica, sans-serif; }
+/*Step 4. the selector .class is used to indent the margin of all the elements with the the class attribute "classy" */
 .classy{margin-left: 10px;}
+/*Step 5. div elements are styled to have a bottom margin*/
 div{margin-bottom: 50px;}
 span {
   width: 100px;
