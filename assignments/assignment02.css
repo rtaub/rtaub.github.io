@@ -38,6 +38,7 @@ nav {
  top: 0;
 }
 /* --- pre-existing css --- */
+/* Step 12. the pre-existing CSS given is modified slightly to work with my page and give the table zebra stipes, a yellow hover, and right align. */
 tr:nth-child(even) {
   background-color: gray;
 }
@@ -54,6 +55,7 @@ td:hover {
 td {
   text-align: right;
 }
-input[type="text"].pinkey:focus {
+/*Step 13. the pre-existing CSS given is again modified slightly to work and gives the input boxes a pink background when focused. */
+input[type="text"]:focus {
   background-color: pink;
 }
