@@ -330,13 +330,8 @@ function add1 (elem, elemTotal) {
     elem.children[2].innerHTML = currentScore + 1;
     //update the total on the scorecard
     scoreTotal = scoreTotal + 1;
-    elemTotal.children[2].innerHTML =scoreTotal;
-  }
+    elemTotal.children[2].innerHTML =scoreTotal; }
   
-  //if (elem.children[2].innerHTML == 5 && elem.children[3].innerHTML == "-" || elem.children[3].innerHTML == "0"){
-    //elem.children[3].innerHTML = "1";
-    //overTotal = overTotal + 1;
-    //elemTotal.children[3].innerHTML = overTotal; }
   let currentOver = elem.children[2].innerHTML;
   currentOver = Number.parseInt(currentOver);
   if (currentOver > 4) {
@@ -345,10 +340,6 @@ function add1 (elem, elemTotal) {
     elem.children[3].innerHTML = currentOver;
     elemTotal.children[3].innerHTML =overTotal; }
  
-  //if (currentOver > 0) {
-    //update the total on the scorecard
-    //overTotal = overTotal + 1;
-    //elem.children[3].innerHTML = overTotal - 4;
-    //elemTotal.children[3].innerHTML =overTotal; }
+  
 }
 
