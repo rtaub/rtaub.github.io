@@ -341,4 +341,13 @@ function add1 (elem, elemTotal) {
     elemTotal.children[3].innerHTML =overTotal; }
 }
 function sub1 (elem, elemTotal) { 
-  
+  if(elem.children[2].innerHTML != "-" || elem.children[2].innerHTML != "0") {
+    scoreTotal = scoreTotal - 1;
+    elemTotal.children[2].innerHTML = scoreTotal;
+  }
+  if(elem.children[3].innerHTML != "-" || elem.children[3].innerHTML != "0") }
+    overTotal = overTotal - 1; 
+    elemTotal.children[3].innerHTML = overTotal;
+  }
+
+}
