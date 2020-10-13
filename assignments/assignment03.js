@@ -321,21 +321,27 @@ elem[19].children[1].innerHTML = parTotal;
 function add1 (elem, elemTotal) {
   if(elem.children[2].innerHTML == "-" || elem.children[2].innerHTML == "0") {
     elem.children[2].innerHTML = "1";
+    //update the total score on the scorecard 
     scoreTotal = scoreTotal + 1;
     elemTotal.children[2].innerHTML =scoreTotal; }
   else {
     let currentScore = elem.children[2].innerHTML;
     currentScore = Number.parseInt(currentScore);
     elem.children[2].innerHTML = currentScore + 1;
+    //update the total on the scorecard
     scoreTotal = scoreTotal + 1;
     elemTotal.children[2].innerHTML =scoreTotal;
   }
   
-  if (elem.children[2].innerHTML == 5){
-    elem.children[3].innerHTML = "1";
+  //if (elem.children[2].innerHTML == 5){
+    //elem.children[3].innerHTML = "1";
+    //overTotal = overTotal + 1;
+    //elemTotal.children[2].innerHTML = overTotal; }
+  if (elem.children[2].innerHTML > 4) {
+    let currentOver = elem.children[2].innerHTML;
+    currentOver = Number.parseInt(currentOver) - 4;
+    //update the total on the scorecard
     overTotal = overTotal + 1;
-    elemTotal.children[2].innerHTML = overTotal; }
-  if (elem.children[2].innerHTML > 5)
-    
+    elemTotal.children[3].innerHTML =overTotal; }
 }
 
