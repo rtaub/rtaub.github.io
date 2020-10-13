@@ -333,11 +333,11 @@ function add1 (elem, elemTotal) {
     elemTotal.children[2].innerHTML =scoreTotal;
   }
   
-  //if (elem.children[2].innerHTML == 5){
-    //elem.children[3].innerHTML = "1";
-    //overTotal = overTotal + 1;
-    //elemTotal.children[2].innerHTML = overTotal; }
-  if (elem.children[2].innerHTML > 4) {
+  if (elem.children[2].innerHTML == 5 && elem.children[3].innerHTML == "-" || elem.children[3].innerHTML == "0"){
+    elem.children[3].innerHTML = "1";
+    overTotal = overTotal + 1;
+    elemTotal.children[3].innerHTML = overTotal; }
+  if (elem.children[2].innerHTML > 5) {
     let currentOver = elem.children[2].innerHTML;
     currentOver = Number.parseInt(currentOver) - 4;
     //update the total on the scorecard
