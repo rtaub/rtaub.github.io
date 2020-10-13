@@ -338,7 +338,9 @@ function add1 (elem, elemTotal) {
     overTotal = overTotal + 1;
     elemTotal.children[3].innerHTML = overTotal; }
   let currentOver = elem.children[2].innerHTML;
-   currentOver = Number.parseInt(currentOver) - 5;
+  currentOver = Number.parseInt(currentOver);
+  if (currentOver > 4) 
+    elemTotal.children[3].innerHTML = currentOver -4;
  
   if (currentOver > 0) {
     //update the total on the scorecard
