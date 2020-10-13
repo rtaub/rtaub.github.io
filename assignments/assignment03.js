@@ -339,7 +339,6 @@ function add1 (elem, elemTotal) {
     currentOver = currentOver - 4;
     elem.children[3].innerHTML = currentOver;
     elemTotal.children[3].innerHTML =overTotal; }
- 
-  
 }
-
+function sub1 (elem, elemTotal) { 
+  
