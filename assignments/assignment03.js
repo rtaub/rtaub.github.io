@@ -319,7 +319,7 @@ elem[19].children[1].innerHTML = parTotal;
 // create an "add1" function
 // takes in the current hole/row and the total to be updated
 function add1 (elem, elemTotal) {
-  if(elem.children[2].innerHTML == "-") {
+  if(elem.children[2].innerHTML == "-" || elem.children[2].innerHTML == "0") {
     elem.children[2].innerHTML = "1";
     scoreTotal = scoreTotal + 1;
     elemTotal.children[2].innerHTML =scoreTotal; }
@@ -330,5 +330,12 @@ function add1 (elem, elemTotal) {
     scoreTotal = scoreTotal + 1;
     elemTotal.children[2].innerHTML =scoreTotal;
   }
+  
+  if (elem.children[2].innerHTML == 5){
+    elem.children[3].innerHTML = "1";
+    overTotal = overTotal + 1;
+    elemTotal.children[2].innerHTML = overTotal; }
+  if (elem.children[2].innerHTML > 5)
+    
 }
 
