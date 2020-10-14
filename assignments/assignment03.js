@@ -332,6 +332,13 @@ function add1 (elem, elemTotal) {
     scoreTotal = scoreTotal + 1;
     elemTotal.children[2].innerHTML =scoreTotal; }
   
+  if (elemTotal.children[3].innerHTML == "-" && elem.children[2].innerHTML == 5)
+    elemTotal.children[3].innerHTML = 1;
+  if (elem.children[2].innerHTML == 5) {
+    elem.children[3].innerHTML = "0";
+    elemTotal.children[2].innerHTML = overTotal;
+  }
+  
   let over = elem.children[2].innerHTML;
   over = Number.parseInt(over);
   if (over > 4) {
@@ -349,12 +356,15 @@ function sub1 (elem, elemTotal) {
     scoreTotal = scoreTotal - 1;
     elemTotal.children[2].innerHTML = scoreTotal;
   }
-  if (elem.children[2].innerHTML > 4){
-    overTotal = overTotal - 1;
-    let over = elem.children[2].innerHTML;
-    over = Number.parseInt(over);
+  let over = elem.children[2].innerHTML;
+  over = Number.parseInt(over);
+  //(elem.children[2].innerHTML > 4)
+  if (over > 4){
+    //let over = elem.children[2].innerHTML;
+    //over = Number.parseInt(over);
     over = over - 5;
     elem.children[3].innerHTML = over;
     elemTotal.children[3].innerHTML =overTotal;
   }
+
 }
