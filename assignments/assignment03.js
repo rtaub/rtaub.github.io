@@ -352,7 +352,7 @@ function sub1 (elem, elemTotal) {
   let over = elem.children[2].innerHTML;
   over = Number.parseInt(over);
   //(elem.children[2].innerHTML > 4)
-  if (over > 4){
+  if (over >=4){
     //let over = elem.children[2].innerHTML;
     //over = Number.parseInt(over);
     over = over - 5;
