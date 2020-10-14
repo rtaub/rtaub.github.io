@@ -356,7 +356,7 @@ function sub1 (elem, elemTotal) {
     //let over = elem.children[2].innerHTML;
     //over = Number.parseInt(over);
     overTotal = overTotal - 1;
-    over = over - 5;
+    over = over - 4;
     elem.children[3].innerHTML = over;
     elemTotal.children[3].innerHTML =overTotal;
   }
