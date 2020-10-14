@@ -360,5 +360,22 @@ function sub1 (elem, elemTotal) {
     elem.children[3].innerHTML = over;
     elemTotal.children[3].innerHTML =overTotal;
   }
+}
 
+function clear (elem, elemTotal){ 
+  let score = elem.children[2].innerHTML;
+  let over = elem.children[3].innerHTML;
+  if (score != "-") {
+    score = Number.parseInt(score);
+    elemTotal.children[2].innerHTML = scoreTotal - score;
+    scoreTotal = scoreTotal - score;
+  }
+  if (over != "-") {
+    over = Number.parseInt(over);
+    elemTotal.children[3].innerHTML = overTotal - over;
+    overTotal = overTotal - over;
+  }
+  
+  elem.children[2].innerHTML = "-";
+  elem.children[3].innerHTML = "-";
 }
