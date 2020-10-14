@@ -325,29 +325,36 @@ function add1 (elem, elemTotal) {
     scoreTotal = scoreTotal + 1;
     elemTotal.children[2].innerHTML =scoreTotal; }
   else {
-    let currentScore = elem.children[2].innerHTML;
-    currentScore = Number.parseInt(currentScore);
-    elem.children[2].innerHTML = currentScore + 1;
+    let score = elem.children[2].innerHTML;
+    score = Number.parseInt(score);
+    elem.children[2].innerHTML = score + 1;
     //update the total on the scorecard
     scoreTotal = scoreTotal + 1;
     elemTotal.children[2].innerHTML =scoreTotal; }
   
-  let currentOver = elem.children[2].innerHTML;
-  currentOver = Number.parseInt(currentOver);
-  if (currentOver > 4) {
+  let over = elem.children[2].innerHTML;
+  over = Number.parseInt(over);
+  if (over > 4) {
     overTotal = overTotal + 1;
-    currentOver = currentOver - 4;
-    elem.children[3].innerHTML = currentOver;
+    over = over - 4;
+    elem.children[3].innerHTML = over;
     elemTotal.children[3].innerHTML =overTotal; }
 }
-//function sub1 (elem, elemTotal) { 
-  //if(elem.children[2].innerHTML != "-" || elem.children[2].innerHTML != "0") {
-    //scoreTotal = scoreTotal - 1;
-    //elemTotal.children[2].innerHTML = scoreTotal;
-  //}
-  //if(elem.children[3].innerHTML != "-" || elem.children[3].innerHTML != "0") }
-    //overTotal = overTotal - 1; 
-    //elemTotal.children[3].innerHTML = overTotal;
-  //}
 
-//} 
+function sub1 (elem, elemTotal) {
+  if (elem.children[2].innerHTML != "0" && elem.children[2].innerHTML != "-"){
+    let score = elem.children[2].innerHTML;
+    score = Number.parseInt(score);
+    elem.children[2].innerHTML = score - 1;
+    scoreTotal = scoreTotal - 1;
+    elemTotal.children[2].innerHTML = scoreTotal;
+  }
+  if (elem.children[2].innerHTML > 4){
+    overTotal = overTotal - 1;
+    let over = elem.children[2].innerHTML;
+    over = Number.parseInt(over);
+    over = over - 5;
+    elem.children[3].innerHTML = over;
+    elemTotal.children[3].innerHTML =overTotal;
+  }
+}
