@@ -307,7 +307,7 @@ elem[18].children[4].children[2].onclick
   = function(){clear(elem[18], elem[19]);};
 
 elem[19] = document.getElementById("totals");
-//declares variables used by the 19 id or the 19th row which is the "totals" row
+//declares variables used by the 19 id/19th row which is the "totals" row
 //The par total remains constant but the totals for the score and the amount over par can change
 const parTotal = 72;
 let scoreTotal = 0;
