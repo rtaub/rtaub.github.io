@@ -49,7 +49,9 @@
 	// display the full clubName of the user-chosen club
 	let newClubName ;
 	let newClubDistances;
-	
+	//alerts the user that they can only carry 14 clubs if they try increasing the total number of clubs past 14
+	if (clubs.length > 14) {
+		alert("Warning: you are only allowed to carry 14 clubs in your golf bag in match play competition."); }
 	function addClub() {
         // your code here
 		newClubName = document.getElementById("clubName").value;
@@ -60,9 +62,9 @@
 	}
 	
 	// navigate to club distance LIST screen
-    function cancelClub() {
-	    window.location.href = "clubDistanceList.html"; 
-    }
+    	function cancelClub() {
+	    	window.location.href = "clubDistanceList.html"; 
+    	}
 </script>
 
 </body>
