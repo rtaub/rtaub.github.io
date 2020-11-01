@@ -50,15 +50,17 @@
 	let newClubName ;
 	let newClubDistances;
 	//alerts the user that they can only carry 14 clubs if they try increasing the total number of clubs past 14
-	if (clubs.length > 14) {
+	if (clubs.length > 13) {
 		alert("Warning: you are only allowed to carry 14 clubs in your golf bag in match play competition."); }
 	function addClub() {
         // your code here
+		//gives newClubName the value in the input box (the name of the new club)
 		newClubName = document.getElementById("clubName").value;
+		//checks to make sure the imput box isn't empty (so a club without a name can't be added)
 		if(newClubName.length > 0){
 			clubs[clubs.length]= [clubs[clubs.length-1][0]+1, " ", newClubName, 0, 0, 0, 0, 15, 150, 150];
-			var storage =JSON.stringify(clubs)
-			localStorage.setItem("clubs", storage); }
+			let newClub =JSON.stringify(clubs)
+			localStorage.setItem("clubs", newClub); }
 	}
 	
 	// navigate to club distance LIST screen
