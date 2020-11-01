@@ -115,8 +115,8 @@ function resetAllClubDistances() {
 		[1199, "Aw",  "Approach", 0, 0, 0, 0, 46.0, 100,  80],
 		[1299, "Gw",  "Gap",      0, 0, 0, 0, 51.0,  90,  70],
 		[1399, "Sw",  "Sand",     0, 0, 0, 0, 56.0,  80,  60],
-		[1499, "Lw",  "Lob",      0, 0, 0, 0, 60.0,  60,  40],
-		[1599, "Ptr", "Putter",   0, 0, 0, 0, 60.0,   3,   3],
+		//[1499, "Lw",  "Lob",      0, 0, 0, 0, 60.0,  60,  40],
+		//[1599, "Ptr", "Putter",   0, 0, 0, 0, 60.0,   3,   3],
 	];
 	// store the array in local storage
 	let str = JSON.stringify(clubs);
