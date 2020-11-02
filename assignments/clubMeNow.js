@@ -92,9 +92,11 @@ function displayClubDistanceEntryForm(c) {
 // replace the current "clubs" array with the previous one
 function undoLastShot() {
         // your code here !
+	//pulls clubsUndo from local storage (created in the updateStats function) which holds the current (or in this case previous) clubs array and assigns it to str
 	let str = localStorage.getItem("clubsUndo");
+	//sets the clubs array to str (sets the clubs array to its previous version before the latest change)
 	localStorage.setItem("clubs", str);
-	//reloads the ClubDistanceList page
+	//reloads the ClubDistanceList page, allowing the undo effect to take place since it will now show/use the updated clubs array
 	window.location.href = "clubDistanceList.html";
 }
 
