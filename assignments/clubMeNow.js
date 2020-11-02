@@ -94,7 +94,7 @@ function undoLastShot() {
         // your code here !
 	let str = localStorage.getItem("clubsUndo");
 	localStorage.setItem("clubs", str);
-	//loadClubDistances();
+	//reloads the ClubDistanceList page
 	window.location.href = "clubDistanceList.html";
 }
 
