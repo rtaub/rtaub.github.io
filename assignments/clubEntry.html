@@ -50,6 +50,8 @@
 	let newClubName ;
 	let newClubDistances;
 	//alerts the user that they can only carry 14 clubs if they click the buton on ClubDistanceList.html to add a new club and they already have 14 or more clubs 
+	//(when you load the page it starts with 12 clubs by default, it originally started with 14 but I took out a couple so that way you can add a few new clubs before you get the alert message, 
+	//otherwise if it started with 14 then you would get the error message as soon as you try to add your first new club)
 	if (clubs.length > 13) {
 		alert("Warning: you currently have 14 or more clubs, and are only allowed to carry 14 clubs in your golf bag in match play competition."); }
 	function addClub() {
