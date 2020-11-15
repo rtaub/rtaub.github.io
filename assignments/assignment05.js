@@ -1,5 +1,5 @@
 // ---------- Global variables ----------
-
+dayjs().format();
 let now = dayjs();
 
 // Covid19api variables
