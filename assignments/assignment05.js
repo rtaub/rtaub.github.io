@@ -109,7 +109,7 @@ function loadContent() {
         = newConfirmedOver1000.map( 
           (x) => x.NewDeaths );
       chartData.options.title.text 
-        = "Covid 19 Hotspots as of " + dayjs().toString;
+        = "Covid 19 Hotspots as of " + day.js().toString;
       myChart = new Chart(ctx, chartData); 
 
     } // end if
