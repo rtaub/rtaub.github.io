@@ -1,6 +1,6 @@
 // ---------- Global variables ----------
 
-// use "var" keyword so code works in CodePen
+var today = new Date();
 
 // Covid19api variables
 var URL = "https://api.covid19api.com/summary";
@@ -109,7 +109,7 @@ function loadContent() {
         = newConfirmedOver1000.map( 
           (x) => x.NewDeaths );
       chartData.options.title.text 
-        = "Covid 19 Hotspots as of " + day.js().toString;
+        = "Covid 19 Hotspots as of " + now.toString();
       myChart = new Chart(ctx, chartData); 
 
     } // end if
