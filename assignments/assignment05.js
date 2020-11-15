@@ -1,6 +1,6 @@
 // ---------- Global variables ----------
 
-var today = new Date();
+let now = dayjs();
 
 // Covid19api variables
 var URL = "https://api.covid19api.com/summary";
