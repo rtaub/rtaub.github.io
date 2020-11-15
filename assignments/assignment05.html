@@ -1,5 +1,5 @@
 <body>
-<h2>Example Chart using Chart.js</h2>
+
 <canvas id="myChart"></canvas>
 
 <h2>Example AJAX call to Covid19api</h2>
@@ -16,7 +16,7 @@
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script>
   dayjs().format();
-  console.log(dayjs().format("YYYY-MM-DD"));
+  //console.log(dayjs().format("YYYY-MM-DD"));
 </script>
 <script src="https://rtaub.github.io/assignments/assignment05.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -134,8 +134,7 @@ function loadContent() {
         = newConfirmedOver1000.map( 
           (x) => x.NewDeaths );
       chartData.options.title.text 
-        = "Covid 19 Hotspots (" + 
-        dayjs().format("YYYY-MM-DD") + ")" ;
+        = "Covid 19 Hotspots as of " + day.js().toString() ;
       myChart = new Chart(ctx, chartData); 
 
     } // end if
