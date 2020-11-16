@@ -83,6 +83,10 @@ var chartData = {
 // https://www.w3schools.com/js/js_ajax_intro.asp
 
 function loadContent() {
+  //if it's been over 24 hours since the last AJAX call (meaning the local storage date would be greater than 84600000 milliseconds different from 
+  //the current day/time (using now which holds the day using dayjs) or if there hasn't been an AJAX call (meaning that date doesn't have a value in local storage))
+  if(!localStorage.getItem("date") || now.valueOf() - localStorage.getItem("date") > 86400000 ) {
+    
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 
@@ -90,6 +94,10 @@ function loadContent() {
       
       covidJson = this.responseText;
       covidJsObj = JSON.parse(covidJson);
+      //sets the date in local storage to the current date in milliseconds using now 
+      localStorage.setItem("date", now.valueOf());
+      //sets json in local storage to covidJson
+      localStorage.setItem("json", covidJson);
       
       newConfirmedOver1000 = [];
 	    
@@ -110,7 +118,7 @@ function loadContent() {
       }
       //use the lodash .orderBy method to order the chart to have the country with the most Total Confirmed per 100000 first 
 	newConfirmedOver1000 = _.orderBy(newConfirmedOver1000, 'TotalConfirmedPer100000', 'desc');
-
+      
       chartData.data.datasets[0].backgroundColor 
         = "rgba(100,100,100,0.4)"; // gray
       chartData.data.datasets[1].backgroundColor 
@@ -123,7 +131,7 @@ function loadContent() {
       chartData.data.datasets[1].label  
         = 'Total Deaths';//changed to total deaths
       chartData.data.datasets[2].label  
-        = 'Total Cases Per 100,000'; //added total cases per 100000
+        = 'Total Cases Per 100,000'; //added total cases per 100000 label
       chartData.data.labels  
         = newConfirmedOver1000.map( (x) => x.Slug );
       chartData.data.datasets[0].data  
@@ -143,12 +151,71 @@ function loadContent() {
     } // end if
     
   }; // end xhttp.onreadystatechange = function()
-  
+  //signals in the console that an ajax call was performed
+  console.log('ajax call');
+  //mkaes a call to the covid 19 api (URL) 
   xhttp.open("GET", URL, true);
   xhttp.send();
+  }//end of if (!localStorage.getItem("date") || now.valueOf() - localStorage.getItem("date") > 86400000 )
+  else {//otherwise pulls the data from local storage
+    //gets the json from local storage 
+    covidJson = localStorage.getItem("json");
+    covidJsObj = JSON.parse(covidJson);
+    
+    newConfirmedOver1000 = [];
+	    
+	for (let c of covidJsObj.Countries) {
+        //makes sure only the bars for countries with at least 50,000 deaths are shown
+	if (c.TotalDeaths > 50000) {
+          newConfirmedOver1000.push({ 
+            "Slug": c.Slug, 
+            "NewConfirmed": c.NewConfirmed, 
+            "NewDeaths": c.NewDeaths,
+	    //added the objects TotalConfirmed, TotalDeaths, and TotalConfirmedPer100000
+            "Populations" : populations[c.Slug],
+	    "TotalConfirmed": c.TotalConfirmed, 
+            "TotalDeaths": c.TotalDeaths,
+	    "TotalConfirmedPer100000": 100000 * c.TotalConfirmed / populations[c.Slug],
+          });
+        }
+      }
+      //use the lodash .orderBy method to order the chart to have the country with the most Total Confirmed per 100000 first 
+	newConfirmedOver1000 = _.orderBy(newConfirmedOver1000, 'TotalConfirmedPer100000', 'desc');
+      
+      chartData.data.datasets[0].backgroundColor 
+        = "rgba(100,100,100,0.4)"; // gray
+      chartData.data.datasets[1].backgroundColor 
+        = "rgba(255,0,0,0.4)"; // red
+      //adds the blue bar which will show the total cases per 100000
+      chartData.data.datasets[2].backgroundColor 
+        = "rgba(0,0,255,0.4)"; // blue
+      chartData.data.datasets[0].label  
+        = 'Total Cases'; //changed to total cases
+      chartData.data.datasets[1].label  
+        = 'Total Deaths';//changed to total deaths
+      chartData.data.datasets[2].label  
+        = 'Total Cases Per 100,000'; //added total cases per 100000 label
+      chartData.data.labels  
+        = newConfirmedOver1000.map( (x) => x.Slug );
+      chartData.data.datasets[0].data  
+        = newConfirmedOver1000.map( 
+          (x) => x.TotalConfirmed );//changed to total confirmed
+      chartData.data.datasets[1].data  
+        = newConfirmedOver1000.map( 
+          (x) => x.TotalDeaths ); //changed to total deaths 
+      chartData.data.datasets[2].data  
+        = newConfirmedOver1000.map( 
+          (x) => x.TotalConfirmedPer100000 ); //added total confirmed per 100000
+      chartData.options.title.text 
+        //uses the variable now which holds the date (using dayjs) and adds the toString method to print it in the title
+	= "Covid 19 Hotspots as of " + now.toString();
+      myChart = new Chart(ctx, chartData); 
+    
+    //signals to the console that there was no ajax call, meaning that it pulled from local storage
+    console.log('no ajax call');
+  }//end of else 
   
 } // end function loadContent() 
-
 // data from: https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population
 var populations = {
   'china' : 1405137440,
