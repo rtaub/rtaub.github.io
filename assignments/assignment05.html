@@ -5,10 +5,11 @@
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
    <div class="container-fluid">
       <div class="row">
-         <!--uses a bootstrap column div to put the chart on the left (also makes it take up more space i.e. col-md-9 while the paragraph has col-md-3 -->
+         <!--uses a bootstrap column div to put the chart on the left (also makes it take up more space i.e. col-md-9 while the paragraph has col-md-3) -->
          <div class="col-12 col-md-9">
             <canvas id="myChart"></canvas>
          </div>
+         <!--button to load the chart -->
          <h2>Load Covid 19 Hotspots Chart</h2>
          <button type="button" onclick="loadContent()">Load Covid-19 Content</button>
          <!-- uses a bootstrap column div to put the information paragraph to the right of the chart -->
@@ -26,6 +27,7 @@
    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
    <!-- link to the js file -->
    <script src="https://rtaub.github.io/assignments/assignment05.js"></script>
+   <!-- calls the dayjs().format() method so it can be used to get the date -->
    <script>dayjs().format();</script>
 </body>
 </html>
