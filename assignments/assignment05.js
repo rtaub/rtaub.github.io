@@ -1,5 +1,5 @@
 // ---------- Global variables ----------
-dayjs().format();
+//dayjs().format();
 //uses the dayjs formatting to get and hold the current date in now 
 let now = dayjs();
 
