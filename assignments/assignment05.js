@@ -1,5 +1,6 @@
 // ---------- Global variables ----------
 dayjs().format();
+//uses the dayjs formatting to get and hold the current date in now 
 let now = dayjs();
 
 // Covid19api variables
@@ -43,7 +44,12 @@ var chartData = {
           // logarithmic scale ignores maxTicksLimit
           maxTicksLimit: 11,
           callback: function(label, index, labels) {
-            return (   label/1000 > 9 
+	    //adjusts the y axis to only show powers of ten 
+            return (   label/1000 > 999999 
+                    || label/1000 == 10000 
+                    || label/1000 == 1000 
+                    || label/1000 == 100 
+                    || label/1000 == 10 
                     || label/1000 == 1 
                     || label/1000 == 0.1 
                     || label/1000 == 0.01) 
@@ -78,43 +84,54 @@ function loadContent() {
       
       covidJson = this.responseText;
       covidJsObj = JSON.parse(covidJson);
-      newConfirmedOver1000 = [];
       
-	    for (let c of covidJsObj.Countries) {
-        if (c.NewConfirmed > 10000) {
+      newConfirmedOver1000 = [];
+	    
+	for (let c of covidJsObj.Countries) {
+        //makes sure only the bars for countries with at least 50,000 deaths are shown
+	if (c.TotalDeaths > 50000) {
           newConfirmedOver1000.push({ 
             "Slug": c.Slug, 
             "NewConfirmed": c.NewConfirmed, 
             "NewDeaths": c.NewDeaths,
-	    "TotalConfirmed": c.TotalConfirmed, 
-            "TotalDeaths": c.TotalDeaths,
+	    //added the objects TotalConfirmed, TotalDeaths, and TotalConfirmedPer100000
             "Populations" : populations[c.Slug],
-	    "TotalConfirmedPer100000": 
-                100000 * c.TotalConfirmed 
-                    / populations[c.Slug],
+		"TotalConfirmed": c.TotalConfirmed, 
+            	"TotalDeaths": c.TotalDeaths,
+		"TotalConfirmedPer100000": 100000 * c.TotalConfirmed / populations[c.Slug],
           });
         }
       }
-      newConfirmedOver1000 = _.orderBy(newConfirmedOver1000, "NewDeaths", "desc");
+      //use the lodash .orderBy method to order the chart to have the country with the most Total Confirmed per 100000 first 
+	newConfirmedOver1000 = _.orderBy(newConfirmedOver1000, "TotalConfirmed100000", "desc");
 
       chartData.data.datasets[0].backgroundColor 
         = "rgba(100,100,100,0.4)"; // gray
       chartData.data.datasets[1].backgroundColor 
         = "rgba(255,0,0,0.4)"; // red
+      //adds the blue bar which will show the total cases per 100000
+      chartData.data.datasets[2].backgroundColor 
+        = "rgba(0,0,255,0.4)"; // blue
       chartData.data.datasets[0].label  
-        = 'new cases';
+        = 'Total Cases'; //changed to total cases
       chartData.data.datasets[1].label  
-        = 'new deaths';
+        = 'Total Deaths';//changed to total deaths
+      chartData.data.datasets[2].label  
+        = 'Total Cases Per 100,000'; //added total cases per 100000
       chartData.data.labels  
         = newConfirmedOver1000.map( (x) => x.Slug );
       chartData.data.datasets[0].data  
         = newConfirmedOver1000.map( 
-          (x) => x.NewConfirmed );
+          (x) => x.TotalConfirmed );//changed to total confirmed
       chartData.data.datasets[1].data  
         = newConfirmedOver1000.map( 
-          (x) => x.NewDeaths );
+          (x) => x.TotalDeaths ); //changed to total deaths 
+      chartData.data.datasets[2].data  
+        = newConfirmedOver1000.map( 
+          (x) => x.TotalConfirmedPer100000 ); //added total confirmed per 100000
       chartData.options.title.text 
-        = "Covid 19 Hotspots as of " + now.toString();
+        //uses the variable now which holds the date (using dayjs) and adds the toString method to print it in the title
+	= "Covid 19 Hotspots as of " + now.toString();
       myChart = new Chart(ctx, chartData); 
 
     } // end if
