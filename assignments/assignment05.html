@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <body>
-   <!-- links to a bootstrap cdn so the chart and small paragraph can be put in two side to side reactive divs -->
+   <!-- links to a bootstrap cdn so the chart and small paragraph can be put in two side to side reactive column divs -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
    <div class="container-fluid">
       <div class="row">
+         <!--uses a bootstrap column div to put the chart on the left (also makes it take up more space i.e. col-md-9 while the paragraph has col-md-3 -->
          <div class="col-12 col-md-9">
             <canvas id="myChart"></canvas>
          </div>
          <h2>Load Covid 19 Hotspots Chart</h2>
          <button type="button" onclick="loadContent()">Load Covid-19 Content</button>
+         <!-- uses a bootstrap column div to put the information paragraph to the right of the chart -->
          <div class="col-12 col-md-3">
             <h3>Covid-19 </h3>
             <p>"The COVID-19 pandemic, also known as the coronavirus pandemic, is an ongoing pandemic of coronavirus disease 2019 (COVID-19) caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2), first identified in December 2019 in Wuhan, China." (<a href="https://en.wikipedia.org/wiki/COVID-19_pandemic">Wikipedia</a>)</p>
@@ -22,6 +24,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
    <!-- Day.js: https://day.js.org/docs/en/installation/browser -->
    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+   <!-- link to the js file -->
    <script src="https://rtaub.github.io/assignments/assignment05.js"></script>
    <script>dayjs().format();</script>
 </body>
