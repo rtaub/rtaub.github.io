@@ -1,5 +1,4 @@
 // ---------- Global variables ----------
-//dayjs().format();
 //uses the dayjs formatting to get and hold the current date in now 
 let now = dayjs();
 
@@ -152,7 +151,7 @@ function loadContent() {
     
   }; // end xhttp.onreadystatechange = function()
   //signals in the console that an ajax call was performed
-  console.log('ajax call');
+  console.log('Most recent AJAX call was over 24 hours ago or localStorage has no data: AJAX call made');
   //mkaes a call to the covid 19 api (URL) 
   xhttp.open("GET", URL, true);
   xhttp.send();
@@ -212,7 +211,7 @@ function loadContent() {
       myChart = new Chart(ctx, chartData); 
     
     //signals to the console that there was no ajax call, meaning that it pulled from local storage
-    console.log('no ajax call');
+    console.log('No AJAX call needed, used recent localStorage data');
   }//end of else 
   
 } // end function loadContent() 
