@@ -31,6 +31,12 @@ var chartData = {
       label: 'oranges',
       data: [2, 29, 5, 5, 2, 3, 10],
       backgroundColor: "rgba(255,140,0,0.4)"
+    },
+    //add another dataset to charData to account for the third bar which will show total per 100000 
+    {
+      label: 'bananas',
+      data: [2, 29, 5, 5, 2, 3, 10],
+      backgroundColor: "rgba(255,255,0,0.4)"
     }]
   },
   options: {
@@ -96,14 +102,14 @@ function loadContent() {
             "NewDeaths": c.NewDeaths,
 	    //added the objects TotalConfirmed, TotalDeaths, and TotalConfirmedPer100000
             "Populations" : populations[c.Slug],
-		"TotalConfirmed": c.TotalConfirmed, 
-            	"TotalDeaths": c.TotalDeaths,
-		"TotalConfirmedPer100000": 100000 * c.TotalConfirmed / populations[c.Slug],
+	    "TotalConfirmed": c.TotalConfirmed, 
+            "TotalDeaths": c.TotalDeaths,
+	    "TotalConfirmedPer100000": 100000 * c.TotalConfirmed / populations[c.Slug],
           });
         }
       }
       //use the lodash .orderBy method to order the chart to have the country with the most Total Confirmed per 100000 first 
-	newConfirmedOver1000 = _.orderBy(newConfirmedOver1000, "TotalConfirmed100000", "desc");
+	newConfirmedOver1000 = _.orderBy(newConfirmedOver1000, 'TotalConfirmedPer100000', 'desc');
 
       chartData.data.datasets[0].backgroundColor 
         = "rgba(100,100,100,0.4)"; // gray
