@@ -152,7 +152,7 @@ function loadContent() {
   }; // end xhttp.onreadystatechange = function()
   //signals in the console that an ajax call was performed
   console.log('Most recent AJAX call was over 24 hours ago or localStorage has no data: AJAX call made');
-  //mkaes a call to the covid 19 api (URL) 
+  //makes a call to the covid 19 api (URL) 
   xhttp.open("GET", URL, true);
   xhttp.send();
   }//end of if (!localStorage.getItem("date") || now.valueOf() - localStorage.getItem("date") > 86400000 )
