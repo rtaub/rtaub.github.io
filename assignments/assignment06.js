@@ -60,7 +60,7 @@ $(document).ready(function(){
   // $("#loan_year01").focus();
   //$("#loan_year01").blur( function() {
     //updateLoansArray();
-  });
+ 
   
 }); // end: function loadDoc()
 
