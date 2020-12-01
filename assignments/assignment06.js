@@ -96,7 +96,7 @@ function updateLoansArray() {
   for (i = 1; i < 6; i++) {  //loops through the amount
     if (!amountP.test($(`#loan_amt0${i}`).val())) { //if amountP doesnt meet the constraint
       valid = false; //set valid to false
-      alert("Invalid amount in entered"); //tells the user they entered an invalid amount  
+      alert("Invalid amount entered"); //tells the user they entered an invalid amount  
     }
   }
 
