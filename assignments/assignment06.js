@@ -53,12 +53,13 @@ $(document).ready(function(){
   }); 
   $("input[type=text]").blur(function() {
     $(this).css("background-color", "white");
+    updateLoansArray();
   });
   
   // set focus to first year: messes up codepen
   // $("#loan_year01").focus();
-  $("#loan_year01").blur( function() {
-    updateLoansArray();
+  //$("#loan_year01").blur( function() {
+    //updateLoansArray();
   });
   
 } // end: function loadDoc()
