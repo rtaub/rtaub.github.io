@@ -56,11 +56,6 @@ $(document).ready(function(){
     updateLoansArray();
   });
   
-  // set focus to first year: messes up codepen
-  // $("#loan_year01").focus();
-  //$("#loan_year01").blur( function() {
-    //updateLoansArray();
- 
   
 }); // end: function loadDoc()
 
@@ -152,7 +147,7 @@ var app = angular.module('appdata', []); //declare app using angular
 app.controller('alldata', function ($scope) { //
   $scope.payments = []; //get the payments
 
-  $scope.populate = function () {  //begin populate function
+  $scope.populate = function () {
     
 
     updateForm(); //update the form with any changes 
