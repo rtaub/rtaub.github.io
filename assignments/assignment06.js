@@ -72,58 +72,50 @@ let toMoney = (value) => {
   return `\$${toComma(value.toFixed(2))}`;
 };
 let savedata = () => {
-  //begin savedata method
-  localStorage.setItem(`as06`, JSON.stringify(loans)); //save all necessary data to be in local storage
+  //save data in local storage
+  localStorage.setItem(`as06`, JSON.stringify(loans)); 
 };
 
 let loaddata = () => {
   if (localStorage.getItem(`as06`) != null) {  //if there is local storage data on the device 
-    loans = JSON.parse(localStorage.getItem(`as06`)); //apply values from the saved data to loans
-    updateForm(); //apply values to what is seen
-  } else {
-    //if there is no on device data
-    alert("Error: no saved values"); //alert user to lack of on device data
+    loans = JSON.parse(localStorage.getItem(`as06`)); //set loans to the values in local storage
+    updateForm(); //updates the shown values
+  } else {  //if there isn't local storage data 
+    alert("Error: No values present in local storage"); //tells the user in an alert box that they have no saved values to load
   }
 };
 
 function updateLoansArray() {
-  //the following values will controll the ability for a value to be entered.
-  let yearcontroller = /^(19|20)\d{2}$/; //checks if the value is a number and within 1899 and 2099
-  let amountcontroller = /^([1-9][0-9]*)+(.[0-9]{1,2})?$/; //checks if the value is a number and above 1 whole dollar
-  let integercontroller = /^(0|)+(.[0-9]{1,5})?$/; //checks to ensure the value is a number is below 1.0
-  let tracker = true; //used to see if there is anything wrong with the constraints listed above
+  //regex tester values 
+  let yearP = /^(19|20)\d{2}$/; //checks if the year is between 1899 and 2099
+  let amountP = /^([1-9][0-9]*)+(.[0-9]{1,2})?$/; //checks if the amount is above 1 
+  let intP = /^(0|)+(.[0-9]{1,5})?$/; //checks if the value is below1.0
+  let valid = true; //checks if there is anything wrong with the above constraints 
 
-  if (!yearcontroller.test($(`#loan_year01`).val())) {
-    //if yearcontroller does not pass
-    tracker = false; //set to false
-    alert("error in year field"); //prompt user with incorrect value
+  if (!yearP.test($(`#loan_year01`).val())) {  //if yearP doesnt meet the constraint
+    valid = false; //set valid to false
+    alert("Invalid year"); //tells the user they have an invalid year 
   }
 
-  for (i = 1; i < 6; i++) {
-    //loop through full amount field
-    if (!amountcontroller.test($(`#loan_amt0${i}`).val())) {
-      //if amountcontrolelr is not passed
-      tracker = false; //set to false
-      alert("error in amount field in box: " + i); //prompt user with error in boxes
+  for (i = 1; i < 6; i++) {  //loops through the amount
+    if (!amountP.test($(`#loan_amt0${i}`).val())) { //if amountP doesnt meet the constraint
+      valid = false; //set valid to false
+      alert("Invalid amount in entered"); //tells the user they entered an invalid amount  
     }
   }
 
-  if (!integercontroller.test($(`#loan_int01`).val())) {
-    //if integercontroller is not passed
-    tracker = false; //set to false
-    alert("error in interest rate field"); //prompt user with error in interest rate field.
+  if (!intP.test($(`#loan_int01`).val())) {  //if intP is doesn't meet the constraint
+    valid = false; //set valid to false
+    alert("Invalid interest rate"); //tells the user they entered an invalid rate
   }
 
-  if (tracker) {
-    //if all previous operations pass with flying colors execute follwing action
-    loans[0].loan_year = parseInt($("#loan_year01").val()); //pass the year value from the input box
-    for (var i = 1; i < 5; i++) {
-      //loop for the rest ofthe input field
-      loans[i].loan_year = loans[0].loan_year + i; //apply value to loans adding i for proper input
+  if (valid) {  //if valid is still true (meaning all the constraints were met)
+    loans[0].loan_year = parseInt($("#loan_year01").val()); //pass the value from the input box to loans[0].loan_year
+    for (var i = 1; i < 5; i++) {  //loops through the rest of the amount boxes 
+      loans[i].loan_year = loans[0].loan_year + i; //sets values to the loans using i to keep track of the input
     }
 
-    for (i = 1; i < 6; i++) {
-      //loop for entirety of amount field to save values
+    for (i = 1; i < 6; i++) { //loop for entirety of amount field to save values
       let amount = parseFloat($(`#loan_amt0${i}`).val()).toFixed(2); //pass the float value as it is a decimal value technically
       loans[i - 1].loan_amount = amount; //save value to loans array.
     }
