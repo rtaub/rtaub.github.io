@@ -147,9 +147,9 @@ let updateForm = () => {
   $(`#loan_int_accrued`).text(toMoney(totalowed)); //set value for total owed after college
 };
 
-var app = angular.module('myApp', []); //declare app using angular 
+var app = angular.module('appdata', []); //declare app using angular 
 
-app.controller('myCtrl', function ($scope) { //
+app.controller('alldata', function ($scope) { //
   $scope.payments = []; //get the payments
 
   $scope.populate = function () {  //begin populate function
@@ -169,14 +169,14 @@ app.controller('myCtrl', function ($scope) { //
         year: loans[4].loan_year + i + 1, //update to the next year
         payed: toMoney(payment), //apply the payment 
         interestamount: toMoney(finalinterest), //apply the finalinterest 
-        finalbalance: toMoney((finalprice += finalinterest)), //update with the end price 
+        endbalance: toMoney((finalprice += finalinterest)), //update with the end price 
       };
     }
     $scope.payments[10] = { //at the last year apply these values 
       year: loans[4].loan_year + 11, //year gets the 11th year 
       payed: toMoney(finalprice), //payed gets the final price/total 
       interestamount: toMoney(0), //since this is the final year and theres nothing left interest amount is set to 0 
-      finalbalance: toMoney(0), //the final balance owed will thus also be 0 
+      endbalance: toMoney(0), //the final balance owed will thus also be 0 
     };
   };
 });
