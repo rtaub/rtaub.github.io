@@ -62,7 +62,7 @@ $(document).ready(function(){
     //updateLoansArray();
   });
   
-} // end: function loadDoc()
+}); // end: function loadDoc()
 
 
 function toComma(value) {
