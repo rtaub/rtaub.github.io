@@ -142,9 +142,9 @@ let updateForm = () => {
   $(`#loan_int_accrued`).text(toMoney(totalowed)); //set value for total owed after college
 };
 
-var app = angular.module('appdata', []); //declare app using angular 
+var app = angular.module("myApp", []); //declare app using angular 
 
-app.controller('alldata', function ($scope) { //
+app.controller('myCtrl', function ($scope) { //
   $scope.payments = []; //get the payments
 
   $scope.populate = function () {
