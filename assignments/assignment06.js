@@ -132,59 +132,51 @@ function updateLoansArray() {
 }
 
 let updateForm = () => {
-  loanWithInterest = 0; //initialize loanwithinterest to 0 
-  let totalloan = 0; //create and initialize the totalloan value
-  for (i = 1; i < 6; i++) {
-    //loop for entire field
-    $(`#loan_year0${i}`).val(loans[i - 1].loan_year); //change the value of the entirety of the loan_year field based on values stored in loans
-    let loaned = loans[i - 1].loan_amount; //create and initialize loaned variable
-    $(`#loan_amt0${i}`).val(loaned); //pull the loaned amount
-    totalloan += parseFloat(loaned); //accumulate total amount loaned
-    $(`#loan_int0${i}`).val(loans[i - 1].loan_int_rate); //pull integer value
-    loanWithInterest =
-      (loanWithInterest + parseFloat(loaned)) * (1 + loans[0].loan_int_rate); //calculate the total loaned value with interest
-    $("#loan_bal0" + i).text(toMoney(loanWithInterest)); //apply value of loanwithinterest
+  loanWithInterest = 0; //set loanwithinterest to 0 
+  let totalloan = 0; //declare totalloan and set to 0  
+  for (i = 1; i < 6; i++) { 
+    $(`#loan_year0${i}`).val(loans[i - 1].loan_year); //change the value of loan_year based on loans 
+    let loaned = loans[i - 1].loan_amount; //declare loaned 
+    $(`#loan_amt0${i}`).val(loaned); //get the loaned amount
+    totalloan += parseFloat(loaned); //add loaned (as float) to totalloan
+    $(`#loan_int0${i}`).val(loans[i - 1].loan_int_rate); //get the integer value
+    loanWithInterest =(loanWithInterest + parseFloat(loaned)) * (1 + loans[0].loan_int_rate); //calculate the loan with interest value
+    $("#loan_bal0" + i).text(toMoney(loanWithInterest)); //set the value to loanwithinterest
   }
   let totalowed = loanWithInterest - totalloan;
-  $(`#loan_int_accrued`).text(toMoney(totalowed)); //apply value for total interest collected over college career
+  $(`#loan_int_accrued`).text(toMoney(totalowed)); //set value for total owed after college
 };
 
-var app = angular.module("appdata", []); //create and initialize app using angular inside the appdata field
+var app = angular.module('myApp', []); //declare app using angular 
 
-app.controller("alldata", function ($scope) {
-  //in the controller field of the html and everything within the alldata field
-  $scope.payments = []; //find the payments h2
+app.controller('myCtrl', function ($scope) { //
+  $scope.payments = []; //get the payments
 
-  $scope.populate = function () {
-    //begin populate function
+  $scope.populate = function () {  //begin populate function
+    
 
-    updateForm(); //update what is visible
+    updateForm(); //update the form with any changes 
 
-    let finalprice = loanWithInterest; //initialize an finalprice value using loanwithinterest
-    let interestrate = loans[0].loan_int_rate; //initialize an interestrate value based on loan in rate
-    let r = interestrate / 12; //create an r value to represnt interest over months instead of years
-    let n = 11; //create an n value for the purpose of not including one month
+    let finalprice = loanWithInterest; //declare finalprice and set it to loanWithInterest
+    let interestrate = loans[0].loan_int_rate; //declare interestrate using the loan int rate
+    let r = interestrate / 12; //declare r to hold the value for interest rate for a month
 
-    let payment =
-      12 * (finalprice / (((1 + r) ** (n * 12) - 1) / (r * (1 + r) ** (n * 12)))); //calculate payment
+    let payment = 12 * (finalprice / (((1 + r) ** (11 * 12) - 1) / (r * (1 + r) ** (11 * 12)))); //calculate payment
     for (let i = 0; i < 10; i++) {
-      //loop 10 times
-      finalprice -= payment; //decrease finalprice
-      let finalinterest = finalprice * interestrate; //create and initialize int to be equal to the montly interest rate * end price
-      $scope.payments[i] = {
-        //adjust payments values
-        year: loans[4].loan_year + i + 1, //go to year the next
-        payed: toMoney(payment), //apply what is payed
-        interestamount: toMoney(finalinterest), //apply what the amount finalinterest was
-        endbalance: toMoney((finalprice += finalinterest)), //apply what the end price looks like
+      finalprice -= payment; //decrease payment from the finalprice
+      let finalinterest = finalprice * interestrate; //declare finalinterest to be the finalprice times the interestrate 
+      $scope.payments[i] = { //update values
+        year: loans[4].loan_year + i + 1, //update to the next year
+        payed: toMoney(payment), //apply the payment 
+        interestamount: toMoney(finalinterest), //apply the finalinterest 
+        finalbalance: toMoney((finalprice += finalinterest)), //update with the end price 
       };
     }
-    $scope.payments[10] = {
-      //at position 10 aply the following values
-      year: loans[4].loan_year + 11, //year will equal the year of interest plus 11
-      payed: toMoney(finalprice), //the amount payed will be equivelant to the ending price
-      interestamount: toMoney(0), //the amount finalinterest should be zero as there is nothing left to increase
-      endbalance: toMoney(0), //the balance of what is owed will be zero as there is nothing left to interest there either.
+    $scope.payments[10] = { //at the last year apply these values 
+      year: loans[4].loan_year + 11, //year gets the 11th year 
+      payed: toMoney(finalprice), //payed gets the final price/total 
+      interestamount: toMoney(0), //since this is the final year and theres nothing left interest amount is set to 0 
+      finalbalance: toMoney(0), //the final balance owed will thus also be 0 
     };
   };
 });
