@@ -43,7 +43,7 @@ $(document).ready(function(){
     //sets the disabled loan interest rates to gray with white text
     $(`#loan_int0${i}`).css({"backgroundColor": "grey","color": "white"});
    loanWithInterest = (loanWithInterest + defaultLoanAmount) * (1 + defaultInterestRate);
-   document.getElementById("loan_bal0" + i).innerHTML = toComma(loanWithInterest.toFixed(2));
+   $("#loan_bal0" + i).text(toMoney(loanWithInterest));
     } // end: "for" loop
   
   // all input fields: select contents on fucus
