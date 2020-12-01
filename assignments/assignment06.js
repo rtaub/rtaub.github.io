@@ -116,23 +116,23 @@ function updateLoansArray() {
       loans[i].loan_year = loans[0].loan_year + i; //sets values to the loans using i to keep track of the input
     }
 
-    for (i = 1; i < 6; i++) { //loop for entirety of amount field to save values
-      let amount = parseFloat($(`#loan_amt0${i}`).val()).toFixed(2); //pass the float value as it is a decimal value technically
-      loans[i - 1].loan_amount = amount; //save value to loans array.
+    for (i = 1; i < 6; i++) { //loop through amount field
+      let amount = parseFloat($(`#loan_amt0${i}`).val()).toFixed(2); //pass the float value to amount 
+      loans[i - 1].loan_amount = amount; //save current value to loans array 
     }
 
-    let interestrate = parseFloat($("#loan_int01").val()); //generate interest rate value
+    let interestrate = parseFloat($("#loan_int01").val()); //declare interest rate 
     for (i = 0; i < 5; i++) {
-      //loop for interest rate field
+      //loop through the interest rates 
       loans[i].loan_int_rate = interestrate; //save interest rate to loans
     }
 
-    updateForm(); //run updateform to apply values
+    updateForm(); //update and apply the values 
   }
 }
 
 let updateForm = () => {
-  loanWithInterest = 0; //initialize loanwithinterest
+  loanWithInterest = 0; //initialize loanwithinterest to 0 
   let totalloan = 0; //create and initialize the totalloan value
   for (i = 1; i < 6; i++) {
     //loop for entire field
@@ -145,8 +145,8 @@ let updateForm = () => {
       (loanWithInterest + parseFloat(loaned)) * (1 + loans[0].loan_int_rate); //calculate the total loaned value with interest
     $("#loan_bal0" + i).text(toMoney(loanWithInterest)); //apply value of loanwithinterest
   }
-  let totalamountowed = loanWithInterest - totalloan;
-  $(`#loan_int_accrued`).text(toMoney(totalamountowed)); //apply value for total interest collected over college career
+  let totalowed = loanWithInterest - totalloan;
+  $(`#loan_int_accrued`).text(toMoney(totalowed)); //apply value for total interest collected over college career
 };
 
 var app = angular.module("appdata", []); //create and initialize app using angular inside the appdata field
@@ -160,30 +160,30 @@ app.controller("alldata", function ($scope) {
 
     updateForm(); //update what is visible
 
-    let endprice = loanWithInterest; //initialize an endprice value using loanwithinterest
+    let finalprice = loanWithInterest; //initialize an finalprice value using loanwithinterest
     let interestrate = loans[0].loan_int_rate; //initialize an interestrate value based on loan in rate
     let r = interestrate / 12; //create an r value to represnt interest over months instead of years
     let n = 11; //create an n value for the purpose of not including one month
 
-    let pay =
-      12 * (endprice / (((1 + r) ** (n * 12) - 1) / (r * (1 + r) ** (n * 12)))); //calculate payment
+    let payment =
+      12 * (finalprice / (((1 + r) ** (n * 12) - 1) / (r * (1 + r) ** (n * 12)))); //calculate payment
     for (let i = 0; i < 10; i++) {
       //loop 10 times
-      endprice -= pay; //decrease endprice
-      let interested = endprice * interestrate; //create and initialize int to be equal to the montly interest rate * end price
+      finalprice -= payment; //decrease finalprice
+      let finalinterest = finalprice * interestrate; //create and initialize int to be equal to the montly interest rate * end price
       $scope.payments[i] = {
         //adjust payments values
         year: loans[4].loan_year + i + 1, //go to year the next
-        payed: toMoney(pay), //apply what is payed
-        interestamount: toMoney(interested), //apply what the amount interested was
-        endbalance: toMoney((endprice += interested)), //apply what the end price looks like
+        payed: toMoney(payment), //apply what is payed
+        interestamount: toMoney(finalinterest), //apply what the amount finalinterest was
+        endbalance: toMoney((finalprice += finalinterest)), //apply what the end price looks like
       };
     }
     $scope.payments[10] = {
       //at position 10 aply the following values
       year: loans[4].loan_year + 11, //year will equal the year of interest plus 11
-      payed: toMoney(endprice), //the amount payed will be equivelant to the ending price
-      interestamount: toMoney(0), //the amount interested should be zero as there is nothing left to increase
+      payed: toMoney(finalprice), //the amount payed will be equivelant to the ending price
+      interestamount: toMoney(0), //the amount finalinterest should be zero as there is nothing left to increase
       endbalance: toMoney(0), //the balance of what is owed will be zero as there is nothing left to interest there either.
     };
   };
